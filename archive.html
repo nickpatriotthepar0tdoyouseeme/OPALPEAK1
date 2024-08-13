@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Event Revealer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-y: scroll;
+            height: 70vh;
+        }
+        .box {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e0e7ff;
+            border: 2px solid #6366f1;
+            border-radius: 8px;
+        }
+        .box:last-child {
+            margin-bottom: 0;
+        }
+        .box h2 {
+            margin-top: 0;
+            color: #4f46e5;
+        }
+        .code-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #cbd5e0;
+            font-size: 1em;
+        }
+        .reveal-text {
+            display: none;
+            margin-top: 15px;
+            color: #10b981;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4f46e5;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #4338ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" data-code="EVENT123">
+            <h2>Event 1</h2>
+            <p>Enter the code to reveal the secret:</p>
+            <input type="text" class="code-input" placeholder="Enter code here...">
+            <button onclick="checkCode(this)">Reveal Secret</button>
+            <p class="reveal-text">Congratulations! You have unlocked Event 1 details.</p>
+        </div>
+        <div class="box" data-code="MYSTERY456">
+            <h2>Event 2</h2>
+            <p>Enter the code to reveal the secret:</p>
+            <input type="text" class="code-input" placeholder="Enter code here...">
+            <button onclick="checkCode(this)">Reveal Secret</button>
+            <p class="reveal-text">Well done! You have unlocked Event 2 details.</p>
+        </div>
+        <div class="box" data-code="SECRET789">
+            <h2>Event 3</h2>
+            <p>Enter the code to reveal the secret:</p>
+            <input type="text" class="code-input" placeholder="Enter code here...">
+            <button onclick="checkCode(this)">Reveal Secret</button>
+            <p class="reveal-text">Amazing! You have unlocked Event 3 details.</p>
+        </div>
+    </div>
+
+    <script>
+        function checkCode(button) {
+            const box = button.parentElement;
+            const input = box.querySelector('.code-input').value.trim();
+            const revealText = box.querySelector('.reveal-text');
+            const correctCode = box.getAttribute('data-code');
+
+            if (input === correctCode) {
+                revealText.style.display = 'block';
+            } else {
+                alert('Incorrect code! Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
