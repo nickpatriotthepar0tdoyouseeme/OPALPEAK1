@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://www.example.com/your-texture-image.jpg') no-repeat center center fixed;
+            background: url('https://www.example.com/your-background-image.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
         }
@@ -21,7 +21,7 @@
             background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             width: 300px;
             text-align: center;
         }
@@ -41,7 +41,7 @@
 
         .login-container input[type="text"], 
         .login-container input[type="password"] {
-            background-color: #222;
+            background-color: #333;
             color: #fff;
         }
 
@@ -49,6 +49,7 @@
             background-color: #00BFFF;
             color: #fff;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .login-container input[type="submit"]:hover {
@@ -86,6 +87,7 @@
             };
 
             if (validUsers[username] === password) {
+                localStorage.setItem('username', username);  // Store username in LocalStorage
                 window.location.href = 'page.html';
             } else {
                 document.getElementById('error').textContent = 'Invalid username or password';
