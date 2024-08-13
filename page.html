@@ -8,82 +8,110 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #001f3f; /* Dark blue background */
+            background-color: #0b3d91;
             color: white;
         }
 
         /* Navbar styles */
         .navbar {
             overflow: hidden;
-            background-color: #000; /* Black background */
-            border-bottom: 2px solid #0056b3; /* Blue border */
+            background-color: #001f3f;
+            border-bottom: 2px solid #00BFFF;
+            padding: 10px;
+            text-align: center;
         }
 
         .navbar a {
-            float: left;
-            display: block;
+            display: inline-block;
             color: #ffffff;
             text-align: center;
             padding: 14px 20px;
             text-decoration: none;
             font-size: 17px;
+            transition: background-color 0.3s;
         }
 
         .navbar a:hover {
-            background-color: #0056b3; /* Darker blue */
+            background-color: #00BFFF;
             color: white;
         }
 
         /* Chat box styles */
         .chat-container {
-            max-width: 600px;
-            margin: 50px auto;
-            border: 2px solid #0056b3;
-            background-color: #002f4f;
+            max-width: 700px;
+            margin: 30px auto;
+            border: 2px solid #00BFFF;
+            background-color: #001f3f;
             border-radius: 10px;
             padding: 20px;
         }
 
-        .username {
-            font-weight: bold;
-            color: red;
-            text-align: left;
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
         .chat-box {
-            background-color: #001f3f;
-            border: 1px solid #0056b3;
+            background-color: #0b3d91;
+            border: 1px solid #00BFFF;
             padding: 10px;
-            height: 200px;
+            height: 300px;
             overflow-y: scroll;
             border-radius: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .message-input {
-            width: 100%;
+            width: calc(100% - 110px);
             padding: 10px;
             border-radius: 5px;
-            border: 1px solid #0056b3;
-            background-color: #001f3f;
+            border: 1px solid #00BFFF;
+            background-color: #0b3d91;
             color: white;
+            margin-right: 10px;
         }
 
         .send-btn {
-            background-color: #0056b3;
+            background-color: #00BFFF;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            float: right;
+            transition: background-color 0.3s;
         }
 
         .send-btn:hover {
-            background-color: #004080;
+            background-color: #008CBA;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00BFFF;
+            background-color: #0b3d91;
+            color: white;
+            display: block;
+            width: 100%;
+        }
+
+        .file-upload::file-selector-button {
+            background-color: #00BFFF;
+            border: none;
+            padding: 5px 10px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-upload::file-selector-button:hover {
+            background-color: #008CBA;
+        }
+
+        .message {
+            margin: 5px 0;
+        }
+
+        .message span.username {
+            font-weight: bold;
+            color: red;
         }
     </style>
 </head>
@@ -99,25 +127,76 @@
 
     <!-- Chat Box -->
     <div class="chat-container">
-        <div class="username">Mostafa</div>
         <div id="chat-box" class="chat-box">
             <!-- Messages will appear here -->
         </div>
         <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
         <button onclick="sendMessage()" class="send-btn">Send</button>
+        <input type="file" id="file-upload" class="file-upload" onchange="uploadFile()">
     </div>
 
     <script>
-        function sendMessage() {
-            var input = document.getElementById("message-input");
-            var message = input.value.trim();
-            if (message !== "") {
-                var chatBox = document.getElementById("chat-box");
-                var newMessage = document.createElement("p");
-                newMessage.textContent = "Mostafa: " + message;
+        // Load saved messages from LocalStorage on page load
+        window.onload = function() {
+            const username = localStorage.getItem('username');
+            if (!username) {
+                window.location.href = 'index.html';
+            } else {
+                loadMessages();
+            }
+        };
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const chatBox = document.getElementById("chat-box");
+            messages.forEach(message => {
+                const newMessage = document.createElement("p");
+                newMessage.innerHTML = `<span class="username">${message.username}:</span> ${message.text}`;
                 chatBox.appendChild(newMessage);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("message-input");
+            const message = input.value.trim();
+            const username = localStorage.getItem('username');
+
+            if (message !== "") {
+                const chatBox = document.getElementById("chat-box");
+                const newMessage = document.createElement("p");
+                newMessage.innerHTML = `<span class="username">${username}:</span> ${message}`;
+                chatBox.appendChild(newMessage);
+
+                saveMessage(username, message);
+
                 input.value = "";
-                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function saveMessage(username, message) {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push({ username, text: message });
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+
+        function uploadFile() {
+            const fileInput = document.getElementById('file-upload');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const username = localStorage.getItem('username');
+                    const chatBox = document.getElementById("chat-box");
+                    const newMessage = document.createElement("p");
+                    newMessage.innerHTML = `<span class="username">${username}:</span> Uploaded a file - ${file.name}`;
+                    chatBox.appendChild(newMessage);
+
+                    saveMessage(username, `Uploaded a file - ${file.name}`);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                };
+                reader.readAsDataURL(file);
             }
         }
     </script>
