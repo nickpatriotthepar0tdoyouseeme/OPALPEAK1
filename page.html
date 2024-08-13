@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #001f3f; /* Dark blue background */
+            color: white;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            overflow: hidden;
+            background-color: #000; /* Black background */
+            border-bottom: 2px solid #0056b3; /* Blue border */
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3; /* Darker blue */
+            color: white;
+        }
+
+        /* Chat box styles */
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            border: 2px solid #0056b3;
+            background-color: #002f4f;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .username {
+            font-weight: bold;
+            color: red;
+            text-align: left;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .chat-box {
+            background-color: #001f3f;
+            border: 1px solid #0056b3;
+            padding: 10px;
+            height: 200px;
+            overflow-y: scroll;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #0056b3;
+            background-color: #001f3f;
+            color: white;
+        }
+
+        .send-btn {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            float: right;
+        }
+
+        .send-btn:hover {
+            background-color: #004080;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="pole.html">Polls</a>
+        <a href="assign.html">Assignments</a>
+        <a href="post.html">Posts</a>
+        <a href="archive.html">Archives</a>
+    </div>
+
+    <!-- Chat Box -->
+    <div class="chat-container">
+        <div class="username">Mostafa</div>
+        <div id="chat-box" class="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
+        <button onclick="sendMessage()" class="send-btn">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var input = document.getElementById("message-input");
+            var message = input.value.trim();
+            if (message !== "") {
+                var chatBox = document.getElementById("chat-box");
+                var newMessage = document.createElement("p");
+                newMessage.textContent = "Mostafa: " + message;
+                chatBox.appendChild(newMessage);
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+            }
+        }
+    </script>
+
+</body>
+</html>
