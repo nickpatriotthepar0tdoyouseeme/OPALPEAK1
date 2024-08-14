@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Page</title>
     <h1>
-       با سلام خدمت دوستان عزیز . به اطلاع میرسانم به دلیل ایجاد مشکل در سرور چت امروز تا ساعت 6 بعد از ظهر چت غیر فعال می باشد.
+       
     </h1>
     <style>
         body {
@@ -127,17 +128,82 @@
         <a href="post.html">Posts</a>
         <a href="archive.html">Archives</a>
     </div>
-<script>
-    import { Talk } from "talkjs";
 
-await Talk.ready;
+    <!-- Chat Box -->
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box">
+            <!-- Messages will appear here -->
+        </div>
+        <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
+        <button onclick="sendMessage()" class="send-btn">Send</button>
+        <input type="file" id="file-upload" class="file-upload" onchange="uploadFile()">
+    </div>
 
-const me = new Talk.User("sample_user_alice");
-const session = new Talk.Session({ appId: "tyzQEqyO", me });
+    <script>
+        // Load saved messages from LocalStorage on page load
+        window.onload = function() {
+            const username = localStorage.getItem('username');
+            if (!username) {
+                window.location.href = 'index.html';
+            } else {
+                loadMessages();
+            }
+        };
 
-const chatbox = session.createChatbox();
-chatbox.select("sample_conversation");
-chatbox.mount(document.getElementById("talkjs-container"));
-</script>
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const chatBox = document.getElementById("chat-box");
+            messages.forEach(message => {
+                const newMessage = document.createElement("p");
+                newMessage.innerHTML = `<span class="username">${message.username}:</span> ${message.text}`;
+                chatBox.appendChild(newMessage);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("message-input");
+            const message = input.value.trim();
+            const username = localStorage.getItem('username');
+
+            if (message !== "") {
+                const chatBox = document.getElementById("chat-box");
+                const newMessage = document.createElement("p");
+                newMessage.innerHTML = `<span class="username">${username}:</span> ${message}`;
+                chatBox.appendChild(newMessage);
+
+                saveMessage(username, message);
+
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function saveMessage(username, message) {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push({ username, text: message });
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+
+        function uploadFile() {
+            const fileInput = document.getElementById('file-upload');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const username = localStorage.getItem('username');
+                    const chatBox = document.getElementById("chat-box");
+                    const newMessage = document.createElement("p");
+                    newMessage.innerHTML = `<span class="username">${username}:</span> Uploaded a file - ${file.name}`;
+                    chatBox.appendChild(newMessage);
+
+                    saveMessage(username, `Uploaded a file - ${file.name}`);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
 </body>
 </html>
