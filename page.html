@@ -127,14 +127,17 @@
         <a href="post.html">Posts</a>
         <a href="archive.html">Archives</a>
     </div>
+<script>
+    import { Talk } from "talkjs";
 
- import { Session, Chatbox } from "@talkjs/react";
+await Talk.ready;
 
-export default function Chat() {
-  return (
-    <Session appId="tyzQEqyO" userId="sample_user_alice">
-      <Chatbox conversationId="sample_conversation" />
-    </Session>
-  );
-}</body>
+const me = new Talk.User("sample_user_alice");
+const session = new Talk.Session({ appId: "tyzQEqyO", me });
+
+const chatbox = session.createChatbox();
+chatbox.select("sample_conversation");
+chatbox.mount(document.getElementById("talkjs-container"));
+</script>
+</body>
 </html>
