@@ -1,0 +1,73 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Token Page</title>  
+    <style>  
+        body {  
+        
+            font-family: Arial, sans-serif;  
+            margin: 20px;  
+        }  
+        #userInfo {  
+            position: absolute;  
+            right: 20px;  
+            top: 20px;  
+        }  
+        .section {   
+            margin-top: 20px;   
+            border: 1px solid #ccc;   
+            padding: 10px;   
+        }  
+    </style>  
+</head>  
+<body>  
+
+    <div id="userInfo">  
+        <strong id="displayUser"></strong>  
+        <h3>You have <span id="tokens"></span> tokens (💰)</h3>  
+    </div>  
+
+    <h1>Token System</h1>  
+
+    <div class="section" id="spendSection">  
+        <h2>Spend Tokens</h2>  
+        <label for="spendAmount">Tokens to Spend:</label>  
+        <input type="number" id="spendAmount" min="1">  
+        <button onclick="spendTokens()">Spend Tokens</button>  
+        <div id="spendResult"></div>  
+    </div>  
+
+    <script>  
+        const tokenAmounts = {  
+            "Mostafa": 1000,  
+            "nick": 900,  
+            "kasra": 800,  
+            "atefi": 700  
+        };  
+
+        const username = localStorage.getItem('username');  
+        const tokens = tokenAmounts[username] || 0;  
+
+        document.getElementById('displayUser').innerText = `${username}:`;  
+        document.getElementById('tokens').innerText = tokens;  
+
+        function spendTokens() {  
+            const spendAmount = parseInt(document.getElementById('spendAmount').value);  
+            if (!isNaN(spendAmount) && spendAmount > 0) {  
+                if (tokens >= spendAmount) {  
+                    tokens -= spendAmount;  
+                    document.getElementById('tokens').innerText = tokens; // Update total  
+                    document.getElementById('spendResult').innerText = `Spent ${spendAmount} tokens.`;  
+                } else {  
+                    document.getElementById('spendResult').innerText = 'Not enough tokens!';  
+                }  
+            } else {  
+                document.getElementById('spendResult').innerText = 'Please enter a valid amount.';  
+            }  
+        }  
+
+    </script>  
+</body>  
+</html>
