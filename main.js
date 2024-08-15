@@ -8,10 +8,3 @@ const session = new Talk.Session({ appId: "tyzQEqyO", me });
 const chatbox = session.createChatbox();
 chatbox.select("sample_conversation");
 chatbox.mount(document.getElementById("talkjs-container"));
-
-
-
-
-
-
-:npm install talkjs @talkjs/react
