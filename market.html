@@ -31,8 +31,8 @@
     <h1>Token System</h1>  
 
     <div class="section" id="revealCodeSection">  
-        <h2>Reveal Code</h2>  
-        <button onclick="revealCode()">Reveal Code (costs 10 tokens)</button>  
+        <h2>Reveal Code for archive 1</h2>  
+        <button id="revealButton" onclick="revealCode()">Reveal Code (costs 10 tokens)</button>  
         <div id="revealResult"></div>  
     </div>  
 
@@ -40,8 +40,8 @@
         const initialTokenAmounts = {  
             "Mostafa": 100,  
             "nick": 90,  
-            "kasra": 0,  
-            "atefi": 0  
+            "kasra": 80,  
+            "atefi": 70  
         };  
 
         const codes = {  
@@ -69,12 +69,12 @@
         function revealCode() {  
             const cost = 10;  
             if (tokens >= cost) {  
+                const code = codes[username];  
                 tokens -= cost; // Decrease the token amount by 10  
                 localStorage.setItem(username + '_tokens', tokens); // Save the updated token amount  
                 document.getElementById('tokens').innerText = tokens; // Update displayed tokens  
-
+                
                 // Show the code specific to the user  
-                const code = codes[username];  
                 document.getElementById('revealResult').innerHTML = `Your code is: <strong>${code}</strong>`;  
             } else {  
                 document.getElementById('revealResult').innerText = 'Not enough tokens!';  
