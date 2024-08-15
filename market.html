@@ -3,10 +3,9 @@
 <head>  
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Token Page</title>  
+    <title>Token System</title>  
     <style>  
         body {  
-        
             font-family: Arial, sans-serif;  
             margin: 20px;  
         }  
@@ -31,43 +30,46 @@
 
     <h1>Token System</h1>  
 
-    <div class="section" id="spendSection">  
-        <h2>Spend Tokens</h2>  
-        <label for="spendAmount">Tokens to Spend:</label>  
-        <input type="number" id="spendAmount" min="1">  
-        <button onclick="spendTokens()">Spend Tokens</button>  
-        <div id="spendResult"></div>  
+    <div class="section" id="revealCodeSection">  
+        <h2>Reveal Code</h2>  
+        <button onclick="revealCode()">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult"></div>  
     </div>  
 
     <script>  
         const tokenAmounts = {  
-            "Mostafa": 1000,  
-            "nick": 1000,  
-            "kasra": 0,  
-            "atefi": 0  
+            "Mostafa": 100,  
+            "nick": 90,  
+            "kasra": 80,  
+            "atefi": 70  
         };  
 
-        const username = localStorage.getItem('username');  
-        const tokens = tokenAmounts[username] || 0;  
+        const codes = {  
+            "Mostafa": "1234",  
+            "nick": "5678",  
+            "kasra": "91011",  
+            "atefi": "1213"  
+        };  
+
+        let username = localStorage.getItem('username');  
+        let tokens = tokenAmounts[username] || 0;  
 
         document.getElementById('displayUser').innerText = `${username}:`;  
         document.getElementById('tokens').innerText = tokens;  
 
-        function spendTokens() {  
-            const spendAmount = parseInt(document.getElementById('spendAmount').value);  
-            if (!isNaN(spendAmount) && spendAmount > 0) {  
-                if (tokens >= spendAmount) {  
-                    tokens -= spendAmount;  
-                    document.getElementById('tokens').innerText = tokens; // Update total  
-                    document.getElementById('spendResult').innerText = `Spent ${spendAmount} tokens.`;  
-                } else {  
-                    document.getElementById('spendResult').innerText = 'Not enough tokens!';  
-                }  
+        function revealCode() {  
+            const cost = 10;  
+            if (tokens >= cost) {  
+                tokens -= cost; // Decrease the token amount by 10  
+                document.getElementById('tokens').innerText = tokens; // Update displayed tokens  
+
+                // Show the code specific to the user  
+                const code = codes[username];  
+                document.getElementById('revealResult').innerHTML = `Your code is: <strong>${code}</strong>`;  
             } else {  
-                document.getElementById('spendResult').innerText = 'Please enter a valid amount.';  
+                document.getElementById('revealResult').innerText = 'Not enough tokens!';  
             }  
         }  
-
     </script>  
 </body>  
 </html>
