@@ -14,10 +14,10 @@
             right: 20px;  
             top: 20px;  
         }  
-        .section {   
-            margin-top: 20px;   
-            border: 1px solid #ccc;   
-            padding: 10px;   
+        .section {  
+            margin-top: 20px;  
+            border: 1px solid #ccc;  
+            padding: 10px;  
         }  
     </style>  
 </head>  
@@ -37,7 +37,7 @@
     </div>  
 
     <script>  
-        const tokenAmounts = {  
+        const initialTokenAmounts = {  
             "Mostafa": 100,  
             "nick": 90,  
             "kasra": 0,  
@@ -51,8 +51,17 @@
             "atefi": "1213"  
         };  
 
-        let username = localStorage.getItem('username');  
-        let tokens = tokenAmounts[username] || 0;  
+        let username = localStorage.getItem('username') || "Mostafa"; // Example default user  
+        let tokens;  
+
+        // Check if tokens are already saved in localStorage  
+        if (localStorage.getItem(username + '_tokens')) {  
+            tokens = Number(localStorage.getItem(username + '_tokens'));  
+        } else {  
+            // If not saved, initialize with the default amount  
+            tokens = initialTokenAmounts[username] || 0;  
+            localStorage.setItem(username + '_tokens', tokens);  
+        }  
 
         document.getElementById('displayUser').innerText = `${username}:`;  
         document.getElementById('tokens').innerText = tokens;  
@@ -61,6 +70,7 @@
             const cost = 10;  
             if (tokens >= cost) {  
                 tokens -= cost; // Decrease the token amount by 10  
+                localStorage.setItem(username + '_tokens', tokens); // Save the updated token amount  
                 document.getElementById('tokens').innerText = tokens; // Update displayed tokens  
 
                 // Show the code specific to the user  
