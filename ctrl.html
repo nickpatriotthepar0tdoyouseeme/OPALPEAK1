@@ -34,6 +34,10 @@
             border-radius: 5px;  
             cursor: pointer;  
         }  
+        .profile-pic {  
+            max-width: 30px;  
+            border-radius: 50%;  
+        }  
     </style>  
 </head>  
 <body>  
@@ -43,6 +47,7 @@
     <tr>  
         <th>Username</th>  
         <th>Date and Time</th>  
+        <th>Profile Picture</th>  
     </tr>  
 </table>  
 <button class="clear-button" id="clearHistory">Clear History</button>  
@@ -51,26 +56,29 @@
     function loadLoginHistory() {  
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory')) || [];  
         const table = document.getElementById('loginHistoryTable');  
+        const profile = JSON.parse(localStorage.getItem('profile')) || {};  
 
         // Clear existing rows  
         table.innerHTML = `  
             <tr>  
                 <th>Username</th>  
                 <th>Date and Time</th>  
+                <th>Profile Picture</th>  
             </tr>  
         `;  
 
         // Populate the table with login history  
         loginHistory.forEach(entry => {  
             const row = document.createElement('tr');  
-            row.innerHTML = `<td>${entry.username}</td><td>${entry.dateTime}</td>`;  
+            const profilePicture = profile.picture ? `<img src="${profile.picture}" class="profile-pic" alt="Profile Picture">` : '';  
+            row.innerHTML = `<td>${entry.username}</td><td>${entry.dateTime}</td><td>${profilePicture}</td>`;  
             table.appendChild(row);  
         });  
     }  
 
     document.getElementById('clearHistory').addEventListener('click', function() {  
         localStorage.removeItem('loginHistory');  
-        loadLoginHistory(); // Refresh the table  
+        loadLoginHistory(); // Refresh table  
     });  
 
     // Load login history on page load  
