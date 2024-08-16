@@ -9,21 +9,28 @@
             background-color: #1a1a1a; /* Dark background */  
             color: #e0e0e0; /* Light text */  
             font-family: Arial, sans-serif;  
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* Allow vertical scrolling if content overflows */
         }  
         .container {  
             display: flex;  
             justify-content: center;  
             align-items: center;  
-            height: 100vh;  
             flex-direction: column;  
+            padding: 20px;
+            height: 100%; /* Use full viewport height */
+            box-sizing: border-box; /* Ensure padding is included in total height */
         }  
         .code-box {  
             background-color: #333; /* Dark box */  
-            padding: 20px;  
+            padding: 15px;  
             border-radius: 8px;  
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
             transition: transform 0.3s;  
             margin: 10px; /* Add margin between code boxes */  
+            width: 100%; /* Ensure code-box takes full width of the container */
+            max-width: 300px; /* Limit maximum width */
         }  
         .code-box:hover {  
             transform: scale(1.05); /* Scale up on hover */  
@@ -118,13 +125,13 @@
         const message = document.getElementById(messageId);  
 
         const codes = {  
-            '1234': 'Access Granted: use code hus23dna1 in chat to use an admin perk after your command.',  
-            'abcd': 'Access Granted: Message',  
-            'pass': 'Access Granted: Message',  
-            'open': 'Access Granted: Message',  
-            'letmein': 'Access Granted: Message',  
-            'welcome': 'Access Granted: Message',  
-            'secret': 'Access Granted: Message'  
+            '1234': 'Access Granted: use command /use followed by code e3qw2 to receive 500 XP.',  
+            'abcd': 'Access Granted: use command /boost followed by code ab45 to double your speed for 5 minutes.',  
+            'pass': 'Access Granted: use command /unlock followed by code qwerty to gain access to hidden levels.',  
+            'open': 'Access Granted: use command /shield followed by code def56 to activate invincibility for 10 minutes.',  
+            'letmein': 'Access Granted: use command /grant followed by code xyz123 to obtain 1,000 bonus points.',  
+            'welcome': 'Access Granted: use command /warp followed by code 7g8h9 to teleport to the next stage.',  
+            'secret': 'Access Granted: use command /reveal followed by code mystery to uncover all hidden items.'  
         };  
 
         if (codes[input]) {  
