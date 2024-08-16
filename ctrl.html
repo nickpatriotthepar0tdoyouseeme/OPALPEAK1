@@ -5,39 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control Panel</title>
     <style>
-        /* Existing styles */
-        body {  
-            font-family: Arial, sans-serif;  
-            margin: 20px;  
-        }  
-        h2 {  
-            color: #00BFFF;  
-        }  
-        table {  
-            width: 100%;  
-            border-collapse: collapse;  
-            margin-top: 20px;  
-        }  
-        th, td {  
-            border: 1px solid #ddd;  
-            padding: 8px;  
-            text-align: left;  
-        }  
-        th {  
-            background-color: #f2f2f2;  
-        }  
-        .clear-button {  
-            margin-top: 20px;  
-            padding: 10px 20px;  
-            background-color: #ff4d4d;  
-            color: white;  
-            border: none;  
-            border-radius: 5px;  
-            cursor: pointer;  
-        }  
-        .profile-pic {  
-            max-width: 30px;  
-            border-radius: 50%;  
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #00BFFF;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .clear-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .profile-pic {
+            max-width: 30px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -56,8 +55,8 @@
 <script>
     function loadLoginHistory() {
         const loginHistory = JSON.parse(localStorage.getItem('loginHistory')) || [];
+        const profiles = JSON.parse(localStorage.getItem('profiles')) || {};
         const table = document.getElementById('loginHistoryTable');
-        const profile = JSON.parse(localStorage.getItem('profile')) || {};
 
         // Clear existing rows
         table.innerHTML = `
@@ -71,7 +70,9 @@
         // Populate the table with login history
         loginHistory.forEach(entry => {
             const row = document.createElement('tr');
-            const profilePicture = profile.picture ? `<img src="${profile.picture}" class="profile-pic" alt="Profile Picture">` : '';
+            const profilePicture = profiles[entry.username] && profiles[entry.username].picture 
+                                  ? `<img src="${profiles[entry.username].picture}" class="profile-pic" alt="Profile Picture">` 
+                                  : '';
             row.innerHTML = `<td>${entry.username}</td><td>${entry.dateTime}</td><td>${profilePicture}</td>`;
             table.appendChild(row);
         });
