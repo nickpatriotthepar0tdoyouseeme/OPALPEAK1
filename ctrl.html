@@ -192,6 +192,79 @@
 </script>
 
 </body>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .ban-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        .ban-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .ban-container select,  
+        .ban-container button {  
+            width: 100%;  
+            padding: 10px;  
+            margin: 10px 0;  
+            border: none;  
+            border-radius: 5px;  
+            background-color: #333;  
+            color: #fff;  
+            cursor: pointer;
+        }
+
+        .ban-container button {  
+            background-color: #ff0000;  
+            color: #fff;  
+        }
+
+        .ban-container button:hover {  
+            background-color: #cc0000;  
+        }
+    </style>
+</head>
+<body>
+    <div class="ban-container">
+        <h2>Ban User</h2>
+        <select id="userSelect">
+            <option value="Mostafa">Mostafa</option>
+            <option value="nick">Nick</option>
+            <option value="kasra">Kasra</option>
+            <option value="atefi">Atefi</option>
+        </select>
+        <button onclick="banUser()">Ban User</button>
+    </div>
+
+    <script>
+        function banUser() {
+            const user = document.getElementById('userSelect').value;
+            let validUsers = JSON.parse(localStorage.getItem('validUsers')) || {
+                "Mostafa": "19689",
+                "nick": "3399",
+                "kasra": "1234",
+                "atefi": "1357"
+            };
+
+            validUsers[user] = "XXXX";
+            localStorage.setItem('validUsers', JSON.stringify(validUsers));
+            alert(`${user} has been banned.`);
+        }
+    </script>
+</body>
 </html>
 
     </body>
