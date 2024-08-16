@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>_-Opal$Peak-_</title>
     <h1>
-     <style>
+    <style>
+        /* Sidebar and Menu Button Styling */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
 
-        /* Hamburger Menu Button */
         .menu-btn {
             position: fixed;
             top: 15px;
@@ -23,7 +23,6 @@
             font-size: 24px;
         }
 
-        /* Sidebar */
         .sidebar {
             height: 100%;
             width: 0;
@@ -92,10 +91,8 @@
 </head>
 <body>
 
-<!-- Hamburger Menu Button -->
 <div class="menu-btn" onclick="toggleSidebar()">&#9776;</div>
 
-<!-- Sidebar -->
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
     <div class="sidebar-content">
@@ -112,13 +109,11 @@
 </div>
 
 <script>
-    // Toggle sidebar visibility
     function toggleSidebar() {
         var sidebar = document.getElementById("mySidebar");
         sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
     }
 
-    // Function to handle profile picture upload
     function uploadProfilePicture(event) {
         var reader = new FileReader();
         reader.onload = function() {
@@ -129,39 +124,35 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
-    // Function to save the profile picture and display user info
     function saveProfilePicture() {
         var profilePicture = document.getElementById("profileImage").src;
         var username = localStorage.getItem('currentUser');
-        var password = localStorage.getItem('currentPassword');
+        if (!username) return;
 
-        // Save profile picture in localStorage
-        var profile = { picture: profilePicture };
-        localStorage.setItem('profile', JSON.stringify(profile));
-
-        // Set user info
-        document.getElementById('userName').textContent = username;
-        document.getElementById('userPassword').textContent = password;
+        var profile = JSON.parse(localStorage.getItem('profiles')) || {};
+        profile[username] = { picture: profilePicture };
+        localStorage.setItem('profiles', JSON.stringify(profile));
 
         alert("Profile Picture Saved!");
     }
 
-    // Load user info from login.html
     window.onload = function() {
         var username = localStorage.getItem('currentUser');
         var password = localStorage.getItem('currentPassword');
-        document.getElementById('userName').textContent = username;
-        document.getElementById('userPassword').textContent = password;
 
-        var profile = JSON.parse(localStorage.getItem('profile'));
-        if (profile && profile.picture) {
-            document.getElementById("profileImage").src = profile.picture;
-            document.getElementById("profileImage").style.display = 'block';
+        if (username) {
+            document.getElementById('userName').textContent = username;
+            document.getElementById('userPassword').textContent = password;
+
+            var profiles = JSON.parse(localStorage.getItem('profiles')) || {};
+            if (profiles[username] && profiles[username].picture) {
+                var image = document.getElementById("profileImage");
+                image.src = profiles[username].picture;
+                image.style.display = 'block';
+            }
         }
     }
 </script>
-
-</body>
     </h1>
     <style>
          h2 {  
