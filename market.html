@@ -107,7 +107,12 @@
             "secret"  
         ];  
 
-        let username = localStorage.getItem('username') || "Mostafa";  
+        let username = localStorage.getItem('currentUser') || "";  
+        if (!username) {
+            // Redirect to login if no user is logged in
+            window.location.href = 'login.html';
+        }
+
         let tokens;  
 
         if (localStorage.getItem(username + '_tokens')) {  
