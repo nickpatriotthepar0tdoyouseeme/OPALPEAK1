@@ -1,143 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-        #userInfo {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            text-align: right;
-        }
-        .section {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .section h2 {
-            margin-top: 0;
-        }
-        .section button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .section button:hover {
-            background-color: #0056b3;
-        }
-        #revealResult {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Events</title>  
+    <style>  
+        body {  
+            background-color: #1a1a1a; /* Dark background */  
+            color: #e0e0e0; /* Light text */  
+            font-family: Arial, sans-serif;  
+        }  
+        .container {  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            flex-direction: column;  
+        }  
+        .code-box {  
+            background-color: #333; /* Dark box */  
+            padding: 20px;  
+            border-radius: 8px;  
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);  
+            transition: transform 0.3s;  
+        }  
+        .code-box:hover {  
+            transform: scale(1.05); /* Scale up on hover */  
+        }  
+        input[type="text"] {  
+            padding: 10px;  
+            border: none;  
+            border-radius: 4px;  
+            margin-top: 10px;  
+            width: 100%;  
+            max-width: 200px;  
+            font-size: 16px;  
+        }  
+        button {  
+            margin-top: 15px;  
+            padding: 10px 15px;  
+            border: none;  
+            border-radius: 4px;  
+            background-color: #4CAF50; /* Green button */  
+            color: white;  
+            font-size: 16px;  
+            cursor: pointer;  
+            transition: background-color 0.3s;  
+        }  
+        button:hover {  
+            background-color: #45a049; /* Darker green on hover */  
+        }  
+        .message {  
+            margin-top: 20px;  
+            font-size: 18px;  
+            color: #4CAF50; /* Green message text */  
+            display: none; /* Initially hidden */  
+        }  
+    </style>  
+</head>  
+<body>  
 
-    <div id="userInfo">
-        <strong id="displayUser"></strong>
-        <h3>You have <span id="tokens"></span> tokens (💰)</h3>
-    </div>
+<div class="container">  
+    <div class="code-box">  
+        <h2>Enter Access Code</h2>  
+        <input type="text" id="codeInput" placeholder="Enter Code">  
+        <button onclick="checkCode()">Submit</button>  
+        <div class="message" id="message"></div>  
+    </div>  
+</div>  
 
-    <h1>Token System</h1>
+<script>  
+    function checkCode() {  
+        const input = document.getElementById('codeInput').value;  
+        const message = document.getElementById('message');  
+        if (input === '1234') {  
+            message.innerText = 'Access Granted: Message';  
+            message.style.display = 'block';  
+        } else {  
+            message.innerText = 'Access Denied!';  
+            message.style.display = 'block';  
+        }  
+    }  
+</script>  
 
-    <!-- Section for revealing code for archive 1 -->
-    <div class="section" id="revealCodeSection1">
-        <h2>Reveal Code for Archive 1</h2>
-        <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult1"></div>
-    </div>
+    <div class="container">  
+    <div class="code-box">  
+        <h2>Enter Access Code</h2>  
+        <input type="text" id="codeInput" placeholder="Enter Code">  
+        <button onclick="checkCode()">Submit</button>  
+        <div class="message" id="message"></div>  
+    </div>  
+</div>  
 
-    <!-- Section for revealing code for archive 2 -->
-    <div class="section" id="revealCodeSection2">
-        <h2>Reveal Code for Archive 2</h2>
-        <button onclick="revealCode(1, 'revealResult2')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult2"></div>
-    </div>
+<script>  
+    function checkCode() {  
+        const input = document.getElementById('codeInput').value;  
+        const message = document.getElementById('message');  
+        if (input === 'abcd') {  
+            message.innerText = 'Access Granted: Message';  
+            message.style.display = 'block';  
+        } else {  
+            message.innerText = 'Access Denied!';  
+            message.style.display = 'block';  
+        }  
+    }  
+</script>  
 
-    <!-- Section for revealing code for archive 3 -->
-    <div class="section" id="revealCodeSection3">
-        <h2>Reveal Code for Archive 3</h2>
-        <button onclick="revealCode(2, 'revealResult3')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult3"></div>
-    </div>
 
-    <!-- Section for revealing code for archive 4 -->
-    <div class="section" id="revealCodeSection4">
-        <h2>Reveal Code for Archive 4</h2>
-        <button onclick="revealCode(3, 'revealResult4')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult4"></div>
-    </div>
-
-    <!-- Section for revealing code for archive 5 -->
-    <div class="section" id="revealCodeSection5">
-        <h2>Reveal Code for Archive 5</h2>
-        <button onclick="revealCode(4, 'revealResult5')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult5"></div>
-    </div>
-
-    <!-- Section for revealing code for archive 6 -->
-    <div class="section" id="revealCodeSection6">
-        <h2>Reveal Code for Archive 6</h2>
-        <button onclick="revealCode(5, 'revealResult6')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult6"></div>
-    </div>
-
-    <script>
-        const initialTokenAmounts = {
-            "Mostafa": 100,
-            "nick": 90,
-            "kasra": 80,
-            "atefi": 70
-        };
-
-        const codes = [
-            "abcd",
-            "pass",
-            "open",
-            "letmein",
-            "welcome",
-            "secret"
-        ];
-
-        let username = localStorage.getItem('username') || "Mostafa";
-        let tokens;
-
-        if (localStorage.getItem(username + '_tokens')) {
-            tokens = Number(localStorage.getItem(username + '_tokens'));
-        } else {
-            tokens = initialTokenAmounts[username] || 0;
-            localStorage.setItem(username + '_tokens', tokens);
-        }
-
-        document.getElementById('displayUser').innerText = `${username}:`;
-        document.getElementById('tokens').innerText = tokens;
-
-        function revealCode(codeIndex, resultElementId) {
-            const cost = 10;
-            if (tokens >= cost) {
-                tokens -= cost;
-                localStorage.setItem(username + '_tokens', tokens);
-                document.getElementById('tokens').innerText = tokens;
-                document.getElementById(resultElementId).innerHTML = `Your code is: <strong>${codes[codeIndex]}</strong>`;
-            } else {
-                document.getElementById(resultElementId).innerText = 'Not enough tokens!';
-            }
-        }
-    </script>
-</body>
+</body>  
 </html>
