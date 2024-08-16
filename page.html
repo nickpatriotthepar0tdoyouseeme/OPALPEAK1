@@ -118,10 +118,27 @@
         <div class="user-info">
             <p><strong>Username:</strong> <span id="userName"></span></p>
             <p><strong>Password:</strong> <span id="userPassword"></span></p>
+            <p><strong>Role: <span id="roleDisplay">Loading role...</span></strong></p>
         </div>
     </div>
 </div>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('currentUser');
+            const userRoles = {
+                "Mostafa": "Administrator",
+                "nick": "Admin",
+                "kasra": "User",
+                "atefi": "User"
+            };
 
+            if (username && userRoles[username]) {
+                document.getElementById('roleDisplay').textContent = `Role: ${userRoles[username]}`;
+            } else {
+                document.getElementById('roleDisplay').textContent = 'Role: Guest';
+            }
+        });
+    </script>
 <script>
     function toggleSidebar() {
         var sidebar = document.getElementById("mySidebar");
