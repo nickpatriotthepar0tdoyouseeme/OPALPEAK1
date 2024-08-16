@@ -1,99 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('https://www.example.com/your-background-image.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: Arial, sans-serif;
-        }
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Login Page</title>  
+    <style>  
+        body {  
+            margin: 0;  
+            padding: 0;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            background: url('https://www.example.com/your-background-image.jpg') no-repeat center center fixed;  
+            background-size: cover;  
+            font-family: Arial, sans-serif;  
+        }  
 
-        .login-container {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            width: 300px;
-            text-align: center;
-        }
+        .login-container {  
+            background-color: rgba(0, 0, 0, 0.8);  
+            padding: 20px;  
+            border-radius: 10px;  
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);  
+            width: 300px;  
+            text-align: center;  
+        }  
 
-        .login-container h2 {
-            color: #00BFFF;
-            margin-bottom: 20px;
-        }
+        .login-container h2 {  
+            color: #00BFFF;  
+            margin-bottom: 20px;  
+        }  
 
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-        }
+        .login-container input {  
+            width: 100%;  
+            padding: 10px;  
+            margin: 10px 0;  
+            border: none;  
+            border-radius: 5px;  
+        }  
 
-        .login-container input[type="text"], 
-        .login-container input[type="password"] {
-            background-color: #333;
-            color: #fff;
-        }
+        .login-container input[type="text"],   
+        .login-container input[type="password"] {  
+            background-color: #333;  
+            color: #fff;  
+        }  
 
-        .login-container input[type="submit"] {
-            background-color: #00BFFF;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+        .login-container input[type="submit"] {  
+            background-color: #00BFFF;  
+            color: #fff;  
+            cursor: pointer;  
+            transition: background-color 0.3s;  
+        }  
 
-        .login-container input[type="submit"]:hover {
-            background-color: #008CBA;
-        }
+        .login-container input[type="submit"]:hover {  
+            background-color: #008CBA;  
+        }  
 
-        .error-message {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <input type="submit" value="Login">
-        </form>
-        <div id="error" class="error-message"></div>
-    </div>
+        .error-message {  
+            color: red;  
+            margin-top: 10px;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="login-container">  
+        <h2>Login</h2>  
+        <form id="loginForm">  
+            <input type="text" id="username" placeholder="Username" required>  
+            <input type="password" id="password" placeholder="Password" required>  
+            <input type="submit" value="Login">  
+        </form>  
+        <div id="error" class="error-message"></div>  
+    </div>  
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    <script>  
+        document.getElementById('loginForm').addEventListener('submit', function(event) {  
+            event.preventDefault();  
 
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;  
+            const password = document.getElementById('password').value;  
 
-            const validUsers = {
-                "Mostafa": "19689",
-                "nick": "3399",
-                "kasra": "1234",
-                "atefi" : "1357"
-            };
+            const validUsers = {  
+                "Mostafa": "19689",  
+                "nick": "3399",  
+                "kasra": "1234",  
+                "atefi": "1357"  
+            };  
 
-            if (validUsers[username] === password) {
-                localStorage.setItem('username', username);  // Store username in LocalStorage
-                window.location.href = 'page.html';
-            } else {
-                document.getElementById('error').textContent = 'Invalid username or password';
-            }
-        });
-    </script>
-</body>
+            if (validUsers[username] === password) {  
+                // Record the login entry  
+                recordLogin(username);  
+                
+                // Redirect to a new page  
+                window.location.href = 'page.html';  
+            } else {  
+                document.getElementById('error').textContent = 'Invalid username or password';  
+            }  
+        });  
+
+        function recordLogin(username) {  
+            const now = new Date();  
+            const dateTime = now.toLocaleString();  
+            const loginEntry = { username, dateTime };  
+
+            let loginHistory = JSON.parse(localStorage.getItem('loginHistory')) || [];  
+            loginHistory.push(loginEntry);  
+            localStorage.setItem('loginHistory', JSON.stringify(loginHistory));  
+        }  
+    </script>  
+</body>  
 </html>
