@@ -6,7 +6,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>_-Opal$Peak-_</title>
     <h1>
-     
+     <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Hamburger Menu Button */
+        .menu-btn {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar-content {
+            padding: 15px;
+            color: #fff;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            cursor: pointer;
+        }
+
+        .profile-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #555;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .upload-btn {
+            display: block;
+            margin: 20px auto;
+            background-color: #00BFFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload-btn:hover {
+            background-color: #008CBA;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hamburger Menu Button -->
+<div class="menu-btn" onclick="toggleSidebar()">&#9776;</div>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+    <div class="sidebar-content">
+        <div class="profile-frame" onclick="document.getElementById('profileInput').click();">
+            <img id="profileImage" alt="Profile Picture">
+        </div>
+        <input type="file" id="profileInput" style="display: none;" accept="image/*" onchange="uploadProfilePicture(event)">
+        <button class="upload-btn" onclick="saveProfilePicture()">Save Profile Picture</button>
+        <div class="user-info">
+            <p><strong>Username:</strong> <span id="userName"></span></p>
+            <p><strong>Password:</strong> <span id="userPassword"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Toggle sidebar visibility
+    function toggleSidebar() {
+        var sidebar = document.getElementById("mySidebar");
+        sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+
+    // Function to handle profile picture upload
+    function uploadProfilePicture(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var image = document.getElementById("profileImage");
+            image.src = reader.result;
+            image.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Function to save the profile picture and display user info
+    function saveProfilePicture() {
+        var profilePicture = document.getElementById("profileImage").src;
+        var username = localStorage.getItem('currentUser');
+        var password = localStorage.getItem('currentPassword');
+
+        // Save profile picture in localStorage
+        var profile = { picture: profilePicture };
+        localStorage.setItem('profile', JSON.stringify(profile));
+
+        // Set user info
+        document.getElementById('userName').textContent = username;
+        document.getElementById('userPassword').textContent = password;
+
+        alert("Profile Picture Saved!");
+    }
+
+    // Load user info from login.html
+    window.onload = function() {
+        var username = localStorage.getItem('currentUser');
+        var password = localStorage.getItem('currentPassword');
+        document.getElementById('userName').textContent = username;
+        document.getElementById('userPassword').textContent = password;
+
+        var profile = JSON.parse(localStorage.getItem('profile'));
+        if (profile && profile.picture) {
+            document.getElementById("profileImage").src = profile.picture;
+            document.getElementById("profileImage").style.display = 'block';
+        }
+    }
+</script>
+
+</body>
     </h1>
     <style>
          h2 {  
