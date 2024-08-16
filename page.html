@@ -6,7 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>_-Opal$Peak-_</title>
     <h1>
-       
+       <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 20px;  
+        }  
+        .sidebar {  
+            width: 250px;  
+            background: #f4f4f4;  
+            padding: 15px;  
+            position: fixed;  
+            left: -250px;  
+            transition: left 0.3s;  
+            border-right: 1px solid #ccc;  
+        }  
+        .sidebar.open {  
+            left: 0;  
+        }  
+        .toggle-btn {  
+            cursor: pointer;  
+            background-color: #007BFF;  
+            color: white;  
+            padding: 10px 15px;  
+            border: none;  
+            border-radius: 5px;  
+        }  
+        .profile-pic {  
+            max-width: 100px;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+<button class="toggle-btn" onclick="toggleSidebar()">Toggle Sidebar</button>  
+
+<div class="sidebar" id="sidebar">  
+    <h3>Profile</h3>  
+    <input type="text" id="profileUsername" placeholder="Username" required>  
+    <input type="password" id="profilePassword" placeholder="Password" required>  
+    <input type="file" id="profilePic" accept="image/*">  
+    <img id="displayPic" class="profile-pic" alt="Profile Picture">  
+</div>  
+
+<script>  
+    // Toggle sidebar  
+    function toggleSidebar() {  
+        const sidebar = document.getElementById('sidebar');  
+        sidebar.classList.toggle('open');  
+    }  
+
+    // Load saved profile data  
+    function loadProfile() {  
+        const profile = JSON.parse(localStorage.getItem('profile')) || {};  
+        document.getElementById('profileUsername').value = profile.username || '';  
+        document.getElementById('profilePassword').value = profile.password || '';  
+        if (profile.picture) {  
+            document.getElementById('displayPic').src = profile.picture;  
+        }  
+    }  
+
+    // Save profile data  
+    function saveProfile() {  
+        const username = document.getElementById('profileUsername').value;  
+        const password = document.getElementById('profilePassword').value;  
+        const pictureInput = document.getElementById('profilePic');  
+
+        let profile = { username, password };  
+
+        if (pictureInput.files[0]) {  
+            const reader = new FileReader();  
+            reader.onload = function(event) {  
+                profile.picture = event.target.result;  
+                localStorage.setItem('profile', JSON.stringify(profile));  
+                document.getElementById('displayPic').src = profile.picture;  
+            };  
+            reader.readAsDataURL(pictureInput.files[0]);  
+        } else {  
+            localStorage.setItem('profile', JSON.stringify(profile));  
+        }  
+    }  
+
+    document.getElementById("profileUsername").addEventListener("change", saveProfile);  
+    document.getElementById("profilePassword").addEventListener("change", saveProfile);  
+    document.getElementById("profilePic").addEventListener("change", saveProfile);  
+
+    // Load profile on page load  
+    loadProfile();  
+</script>  
+</body>  
     </h1>
     <style>
          h2 {  
