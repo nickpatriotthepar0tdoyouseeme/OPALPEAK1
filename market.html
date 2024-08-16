@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f9f9f9;
+            background-color: #ff0000;
         }
         #userInfo {
             position: absolute;
@@ -54,58 +54,64 @@
     </div>
 
     <h1>Token System</h1>
+     <div class="section" id="revealCodeSection1">
+        <h2>Reveal Code for Archive 1</h2>
+        <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>
+        <div id="revealResult1"></div>
+    </div>
 
     <!-- Section for revealing code for archive 1 -->
     <div class="section" id="revealCodeSection1">
-        <h2>Reveal Code for Archive 1</h2>
+        <h2>Reveal Code for Archive 2</h2>
         <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult1"></div>
     </div>
 
     <!-- Section for revealing code for archive 2 -->
     <div class="section" id="revealCodeSection2">
-        <h2>Reveal Code for Archive 2</h2>
+        <h2>Reveal Code for Archive 3</h2>
         <button onclick="revealCode(1, 'revealResult2')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult2"></div>
     </div>
 
     <!-- Section for revealing code for archive 3 -->
     <div class="section" id="revealCodeSection3">
-        <h2>Reveal Code for Archive 3</h2>
+        <h2>Reveal Code for Archive 4</h2>
         <button onclick="revealCode(2, 'revealResult3')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult3"></div>
     </div>
 
     <!-- Section for revealing code for archive 4 -->
     <div class="section" id="revealCodeSection4">
-        <h2>Reveal Code for Archive 4</h2>
+        <h2>Reveal Code for Archive 5</h2>
         <button onclick="revealCode(3, 'revealResult4')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult4"></div>
     </div>
 
     <!-- Section for revealing code for archive 5 -->
     <div class="section" id="revealCodeSection5">
-        <h2>Reveal Code for Archive 5</h2>
+        <h2>Reveal Code for Archive 6</h2>
         <button onclick="revealCode(4, 'revealResult5')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult5"></div>
     </div>
 
     <!-- Section for revealing code for archive 6 -->
     <div class="section" id="revealCodeSection6">
-        <h2>Reveal Code for Archive 6</h2>
+        <h2>Reveal Code for Archive 7</h2>
         <button onclick="revealCode(5, 'revealResult6')">Reveal Code (costs 10 tokens)</button>
         <div id="revealResult6"></div>
     </div>
 
     <script>
         const initialTokenAmounts = {
-            "Mostafa": 100,
-            "nick": 90,
-            "kasra": 80,
-            "atefi": 70
+            "Mostafa": 0,
+            "nick": 0,
+            "kasra": 0,
+            "atefi": 0
         };
 
         const codes = [
+            "1234",
             "abcd",
             "pass",
             "open",
