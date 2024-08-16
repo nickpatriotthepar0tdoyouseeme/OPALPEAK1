@@ -1,150 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token System</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #ff0000;
-        }
-        #userInfo {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            text-align: right;
-        }
-        .section {
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .section h2 {
-            margin-top: 0;
-        }
-        .section button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .section button:hover {
-            background-color: #0056b3;
-        }
-        #revealResult {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Token System</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 20px;  
+            background-color: #ff0000;  
+        }  
+        #userInfo {  
+            position: absolute;  
+            right: 20px;  
+            top: 20px;  
+            text-align: right;  
+        }  
+        .section {  
+            margin-top: 20px;  
+            border: 1px solid #ccc;  
+            padding: 15px;  
+            background-color: #fff;  
+            border-radius: 5px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+        }  
+        .section h2 {  
+            margin-top: 0;  
+        }  
+        .section button {  
+            padding: 10px 20px;  
+            border: none;  
+            background-color: #007bff;  
+            color: white;  
+            border-radius: 5px;  
+            cursor: pointer;  
+            font-size: 16px;  
+        }  
+        .section button:hover {  
+            background-color: #0056b3;  
+        }  
+        #revealResult {  
+            margin-top: 10px;  
+            font-weight: bold;  
+            color: #333;  
+        }  
+    </style>  
+</head>  
+<body>  
 
-    <div id="userInfo">
-       
-        <h3>You have <span id="tokens"></span> tokens (💰)</h3>
-    </div>
+    <div id="userInfo">  
+        <h3>You have <span id="tokens"></span> tokens (💰)</h3>  
+    </div>  
 
-    <h1>Token System</h1>
-     <div class="section" id="revealCodeSection1">
-        <h2>Reveal Code for Archive 1</h2>
-        <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult1"></div>
-    </div>
+    <h1>Token System</h1>  
+    <div class="section" id="revealCodeSection1">  
+        <h2>Reveal Code for Archive 1</h2>  
+        <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult1"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 1 -->
-    <div class="section" id="revealCodeSection1">
-        <h2>Reveal Code for Archive 2</h2>
-        <button onclick="revealCode(0, 'revealResult1')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult1"></div>
-    </div>
+    <div class="section" id="revealCodeSection2">  
+        <h2>Reveal Code for Archive 2</h2>  
+        <button onclick="revealCode(1, 'revealResult2')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult2"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 2 -->
-    <div class="section" id="revealCodeSection2">
-        <h2>Reveal Code for Archive 3</h2>
-        <button onclick="revealCode(1, 'revealResult2')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult2"></div>
-    </div>
+    <div class="section" id="revealCodeSection3">  
+        <h2>Reveal Code for Archive 3</h2>  
+        <button onclick="revealCode(2, 'revealResult3')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult3"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 3 -->
-    <div class="section" id="revealCodeSection3">
-        <h2>Reveal Code for Archive 4</h2>
-        <button onclick="revealCode(2, 'revealResult3')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult3"></div>
-    </div>
+    <div class="section" id="revealCodeSection4">  
+        <h2>Reveal Code for Archive 4</h2>  
+        <button onclick="revealCode(3, 'revealResult4')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult4"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 4 -->
-    <div class="section" id="revealCodeSection4">
-        <h2>Reveal Code for Archive 5</h2>
-        <button onclick="revealCode(3, 'revealResult4')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult4"></div>
-    </div>
+    <div class="section" id="revealCodeSection5">  
+        <h2>Reveal Code for Archive 5</h2>  
+        <button onclick="revealCode(4, 'revealResult5')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult5"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 5 -->
-    <div class="section" id="revealCodeSection5">
-        <h2>Reveal Code for Archive 6</h2>
-        <button onclick="revealCode(4, 'revealResult5')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult5"></div>
-    </div>
+    <div class="section" id="revealCodeSection6">  
+        <h2>Reveal Code for Archive 6</h2>  
+        <button onclick="revealCode(5, 'revealResult6')">Reveal Code (costs 10 tokens)</button>  
+        <div id="revealResult6"></div>  
+    </div>  
 
-    <!-- Section for revealing code for archive 6 -->
-    <div class="section" id="revealCodeSection6">
-        <h2>Reveal Code for Archive 7</h2>
-        <button onclick="revealCode(5, 'revealResult6')">Reveal Code (costs 10 tokens)</button>
-        <div id="revealResult6"></div>
-    </div>
+    <script>  
+        const initialTokenAmounts = {  
+            "Mostafa": 50, // Starting tokens for demonstration  
+            "nick": 0,  
+            "kasra": 0,  
+            "atefi": 0  
+        };  
 
-    <script>
-        const initialTokenAmounts = {
-            "Mostafa": 0,
-            "nick": 0,
-            "kasra": 0,
-            "atefi": 0
-        };
+        const codes = [  
+            "1234",  
+            "abcd",  
+            "pass",  
+            "open",  
+            "letmein",  
+            "welcome",  
+            "secret"  
+        ];  
 
-        const codes = [
-            "1234",
-            "abcd",
-            "pass",
-            "open",
-            "letmein",
-            "welcome",
-            "secret"
-        ];
+        let username = localStorage.getItem('username') || "Mostafa";  
+        let tokens;  
 
-        let username = localStorage.getItem('username') || "Mostafa";
-        let tokens;
+        if (localStorage.getItem(username + '_tokens')) {  
+            tokens = Number(localStorage.getItem(username + '_tokens'));  
+        } else {  
+            tokens = initialTokenAmounts[username] || 0;  
+            localStorage.setItem(username + '_tokens', tokens);  
+        }  
 
-        if (localStorage.getItem(username + '_tokens')) {
-            tokens = Number(localStorage.getItem(username + '_tokens'));
-        } else {
-            tokens = initialTokenAmounts[username] || 0;
-            localStorage.setItem(username + '_tokens', tokens);
-        }
+        document.getElementById('tokens').innerText = tokens;  
 
-        document.getElementById('displayUser').innerText = `${username}:`;
-        document.getElementById('tokens').innerText = tokens;
-
-        function revealCode(codeIndex, resultElementId) {
-            const cost = 10;
-            if (tokens >= cost) {
-                tokens -= cost;
-                localStorage.setItem(username + '_tokens', tokens);
-                document.getElementById('tokens').innerText = tokens;
-                document.getElementById(resultElementId).innerHTML = `Your code is: <strong>${codes[codeIndex]}</strong>`;
-            } else {
-                document.getElementById(resultElementId).innerText = 'Not enough tokens!';
-            }
-        }
-    </script>
-</body>
+        function revealCode(codeIndex, resultElementId) {  
+            const cost = 10;  
+            if (tokens >= cost) {  
+                tokens -= cost;  
+                localStorage.setItem(username + '_tokens', tokens);  
+                document.getElementById('tokens').innerText = tokens;  
+                document.getElementById(resultElementId).innerHTML = `Your code is: <strong>${codes[codeIndex]}</strong>`;  
+            } else {  
+                document.getElementById(resultElementId).innerText = 'Not enough tokens!';  
+            }  
+        }  
+    </script>  
+</body>  
 </html>
-
